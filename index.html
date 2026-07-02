@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio Réseaux</title>
+    <!-- FontAwesome pour les logos GitHub, LinkedIn, etc. -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -211,6 +212,20 @@
             min-height: 90vh;
         }
 
+        /* AJOUT : Style pour la photo de profil */
+        .profile-container {
+            margin-bottom: 25px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-cisco);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.4); /* Effet halo lumineux */
+        }
+
         .hero h1 {
             font-size: 48px;
             margin-bottom: 10px;
@@ -290,6 +305,7 @@
 </head>
 <body>
 
+    <!-- ANIMATION PACKET TRACER (S'enlève dès que la page est chargée) -->
     <div id="loader">
         <div class="packet-tracer-sim">
             <div class="pc-node" id="pcA">
@@ -306,6 +322,7 @@
         <div class="loader-text">PING EN COURS... TRACERT...</div>
     </div>
 
+    <!-- MENU LATÉRAL GAUCHE -->
     <sidebar>
         <div class="sidebar-brand">
             <h2>Mon Portfolio</h2>
@@ -328,9 +345,19 @@
         </div>
     </sidebar>
 
+    <!-- ZONE DE CONTENU PRINCIPAL -->
     <main>
 
+        <!-- ACCUEIL / PRÉSENTATION -->
         <section id="accueil" class="hero">
+            
+            <!-- TA PHOTO ICI -->
+            <div class="profile-container">
+                <!-- Remplace "ma-photo.jpg" par le nom de ton image (ex: photo.jpg ou photo.png) -->
+                <!-- Conseil : Mets ta photo dans le même dossier sur GitHub ! -->
+                <img src="ma-photo.jpg" alt="Ma Photo de Profil" class="profile-img" onerror="this.src='https://via.placeholder.com/150/1e293b/00b4d8?text=Photo';">
+            </div>
+
             <h1>Bonjour, je suis <span>[Ton Prénom]</span></h1>
             <h3>Ce que je fais actuellement & Ce que je veux devenir</h3>
             <p>
@@ -338,6 +365,7 @@
                 Mon objectif à terme est de devenir <strong>[Le métier de tes rêves, ex: Ingénieur Cloud & Sécurité Réseaux]</strong>.
             </p>
 
+            <!-- LIENS / LOGOS REDIRECTION -->
             <div class="social-links">
                 <a href="#" target="_blank" class="social-btn" title="Mon Site Web"><i class="fa-solid fa-globe"></i></a>
                 <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
@@ -346,6 +374,7 @@
             </div>
         </section>
 
+        <!-- FORMATIONS -->
         <section id="formations">
             <h2 class="section-title">Formations</h2>
             <div class="grid-box">
@@ -357,6 +386,7 @@
             </div>
         </section>
 
+        <!-- COMPÉTENCES -->
         <section id="competences">
             <h2 class="section-title">Compétences</h2>
             <div class="grid-box">
@@ -371,6 +401,7 @@
             </div>
         </section>
 
+        <!-- CERTIFICATIONS -->
         <section id="certifications">
             <h2 class="section-title">Certifications</h2>
             <div class="grid-box">
@@ -381,6 +412,7 @@
             </div>
         </section>
 
+        <!-- PROJETS ET RÉALISATIONS -->
         <section id="projets">
             <h2 class="section-title">Projets & Réalisations</h2>
             <div class="grid-box">
@@ -391,16 +423,19 @@
             </div>
         </section>
 
+        <!-- CENTRES D'INTÉRÊT -->
         <section id="interets">
             <h2 class="section-title">Centres d'intérêt</h2>
             <p style="color: var(--text-muted);">Cybersécurité, CTF, Veille technologique, Gaming, Échecs...</p>
         </section>
 
+        <!-- BLOG -->
         <section id="blog">
             <h2 class="section-title">Blog</h2>
             <p style="color: var(--text-muted);">Articles techniques à venir très prochainement sur les réseaux et l'automatisation.</p>
         </section>
 
+        <!-- CONTACT -->
         <section id="contact">
             <h2 class="section-title">Contact</h2>
             <p style="color: var(--text-muted); margin-bottom: 20px;">N'hésitez pas à me contacter pour toute opportunité !</p>
@@ -409,11 +444,10 @@
 
     </main>
 
+    <!-- SCRIPT POUR GERER LE PACKET TRACER LOADER -->
     <script>
-        // Masque l'animation une fois que TOUTE la page est complètement chargée
         window.addEventListener('load', function () {
             const loader = document.getElementById('loader');
-            // Petit délai d'une seconde pour bien voir l'animation réseau au début
             setTimeout(() => {
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
