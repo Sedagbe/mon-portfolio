@@ -15,13 +15,13 @@
         ------------------------------------------------------ */
         :root {
             --bg-main: #0b0f19;        /* Bleu nuit très profond */
-            --bg-sidebar: #111827;     /* Teinte légèrement plus claire pour le menu */
-            --bg-card: #1f2937;        /* Cartes épurées */
+            --bg-sidebar: #111827;     /* Teinte menu de gauche */
+            --bg-card: #1f2937;        /* Fonds de cartes épurés */
             --text-pure: #ffffff;
-            --text-body: #9ca3af;       /* Gris adouci pour soulager les yeux */
-            --cisco-blue: #00b4d8;     /* Liaison / Data */
+            --text-body: #9ca3af;       /* Gris adouci */
+            --cisco-blue: #00b4d8;     /* Liaison / Data active */
             --terminal-green: #10b981; /* Ping success / LED Verte */
-            --border-color: #374151;   /* Lignes fines et discrètes */
+            --border-color: #374151;   /* Lignes fines */
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -43,7 +43,7 @@
         }
 
         /* ------------------------------------------------------
-           2. ANIMATION PACKET TRACER CINÉMATIQUE
+           2. ANIMATION PACKET TRACER CINÉMATIQUE (LOADER)
         ------------------------------------------------------ */
         #loader {
             position: fixed;
@@ -77,7 +77,6 @@
         .network-node i {
             font-size: 54px;
             color: #4b5563;
-            transition: color 0.4s;
         }
 
         .network-node span {
@@ -110,15 +109,13 @@
             background-color: var(--cisco-blue);
             border-radius: 50%;
             z-index: 3;
-            box-shadow: 0 0 12px var(--cisco-blue), 0 0 20px var(--cisco-blue);
-            animation: packetTransit 2.5s infinite ease-in-out;
+            box-shadow: 0 0 12px var(--cisco-blue);
+            animation: packetTransit 2s infinite ease-in-out;
         }
 
         @keyframes packetTransit {
             0% { left: 65px; background-color: var(--cisco-blue); }
-            45% { background-color: var(--cisco-blue); }
             50% { left: calc(100% - 73px); background-color: var(--terminal-green); box-shadow: 0 0 12px var(--terminal-green); }
-            95% { background-color: var(--terminal-green); }
             100% { left: 65px; background-color: var(--cisco-blue); }
         }
 
@@ -127,18 +124,13 @@
             font-family: var(--font-mono);
             font-size: 13px;
             color: var(--text-body);
-            height: 20px;
         }
 
-        .console-cursor {
-            animation: blink 0.8s infinite steps(2);
-            color: var(--cisco-blue);
-        }
-
+        .console-cursor { animation: blink 0.8s infinite steps(2); color: var(--cisco-blue); }
         @keyframes blink { 50% { opacity: 0; } }
 
         /* ------------------------------------------------------
-           3. SIDEBAR NAVIGATION ULTRA-ÉPURÉE
+           3. SIDEBAR NAVIGATION 
         ------------------------------------------------------ */
         sidebar {
             width: 280px;
@@ -147,7 +139,7 @@
             left: 0;
             top: 0;
             background-color: var(--bg-sidebar);
-            padding: 50px 30px;
+            padding: 40px 25px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -155,245 +147,127 @@
             z-index: 100;
         }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-dot { width: 8px; height: 8px; background-color: var(--terminal-green); border-radius: 50%; box-shadow: 0 0 8px var(--terminal-green); }
+        .logo-area h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
 
-        .logo-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--terminal-green);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--terminal-green);
-        }
-
-        .logo-area h2 {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-menu {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
+        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; }
         .nav-menu a {
             color: var(--text-body);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: 8px;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
         }
-
-        .nav-menu a i {
-            font-size: 16px;
-            width: 20px;
-            transition: transform 0.25s;
-        }
-
-        .nav-menu a:hover {
-            color: var(--text-pure);
-            background-color: rgba(255, 255, 255, 0.03);
-        }
-
-        .nav-menu a:hover i {
-            transform: translateX(3px);
-            color: var(--cisco-blue);
-        }
+        .nav-menu a:hover { color: var(--text-pure); background-color: rgba(255, 255, 255, 0.03); }
+        .nav-menu a:hover i { color: var(--cisco-blue); transform: translateX(2px); }
+        .nav-menu i { width: 18px; transition: transform 0.2s; }
 
         /* ------------------------------------------------------
-           4. CONTENU PRINCIPAL & DESIGN DES SECTIONS
+           4. CONTENU PRINCIPAL & CARTES
         ------------------------------------------------------ */
-        main {
-            margin-left: 280px;
-            width: calc(100% - 280px);
-            padding: 0 80px;
-        }
+        main { margin-left: 280px; width: calc(100% - 280px); padding: 0 80px; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 0; border-bottom: 1px solid rgba(55, 65, 81, 0.2); }
+        
+        .section-header { margin-bottom: 40px; }
+        .section-tag { font-family: var(--font-mono); color: var(--cisco-blue); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 6px; }
+        .section-title { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; }
 
-        section {
-            min-height: 100vh;
+        /* HERO ACCUEIL */
+        .hero-wrapper { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; }
+        .avatar-frame { position: relative; width: 160px; height: 160px; }
+        .avatar-img { width: 100%; height: 100%; border-radius: 24px; object-fit: cover; border: 1px solid var(--border-color); background: var(--bg-sidebar); }
+        .status-badge { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: #111827; border: 1px solid var(--border-color); padding: 4px 12px; border-radius: 20px; font-family: var(--font-mono); font-size: 9px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+        .status-dot { width: 6px; height: 6px; background-color: var(--terminal-green); border-radius: 50%; animation: pulse 2s infinite; }
+
+        .hero-text h1 { font-size: 48px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
+        .hero-text h1 span { color: var(--cisco-blue); }
+        .hero-text h3 { font-size: 20px; font-weight: 500; color: var(--text-body); margin-bottom: 20px; }
+        .hero-text p { font-size: 15px; color: var(--text-body); line-height: 1.6; max-width: 680px; margin-bottom: 30px; }
+
+        /* SOCIAUX LIENS */
+        .gateway-links { display: flex; gap: 12px; }
+        .gateway-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background-color: var(--bg-sidebar); color: var(--text-body); text-decoration: none; font-size: 16px; transition: all 0.2s ease; border: 1px solid var(--border-color); }
+        .gateway-btn:hover { color: var(--text-pure); border-color: var(--cisco-blue); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 180, 216, 0.15); }
+
+        /* GRID SYSTEM */
+        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .clean-card { background-color: var(--bg-sidebar); border: 1px solid var(--border-color); padding: 25px; border-radius: 14px; transition: border-color 0.25s, transform 0.25s; position: relative; }
+        .clean-card:hover { border-color: rgba(0, 180, 216, 0.3); transform: translateY(-2px); }
+        .clean-card h3 { font-size: 18px; margin-bottom: 8px; font-weight: 600; }
+        .clean-card p { color: var(--text-body); font-size: 13.5px; line-height: 1.5; }
+        
+        /* TIMELINE EXPERIENCES */
+        .xp-timeline { display: flex; flex-direction: column; gap: 20px; }
+        .xp-card { background: var(--bg-sidebar); border-left: 3px solid var(--cisco-blue); padding: 25px; border-radius: 0 14px 14px 0; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+        .xp-header { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: flex-start; }
+        .xp-date { font-family: var(--font-mono); font-size: 12px; color: var(--cisco-blue); background: rgba(0, 180, 216, 0.05); padding: 4px 10px; border-radius: 6px; }
+        .xp-card ul { margin-left: 18px; color: var(--text-body); font-size: 13.5px; line-height: 1.6; }
+        .xp-result { margin-top: 10px; font-weight: 500; color: var(--terminal-green); font-size: 13px; font-family: var(--font-mono); }
+
+        /* LABELS BADGES COMPÉTENCES */
+        .skill-group { margin-bottom: 25px; }
+        .skill-group h4 { font-size: 15px; color: var(--cisco-blue); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .badge-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-badge { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 8px; font-size: 13px; color: var(--text-body); }
+
+        /* CERTIFICATION SPECIFIC BUTTONS */
+        .cert-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .cert-org { font-family: var(--font-mono); font-size: 11px; color: var(--cisco-blue); text-transform: uppercase; }
+        .view-cert-btn { background: rgba(0, 180, 216, 0.1); border: 1px solid var(--cisco-blue); color: var(--text-pure); font-size: 12px; padding: 5px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+        .view-cert-btn:hover { background: var(--cisco-blue); color: #000; font-weight: 600; }
+
+        /* ------------------------------------------------------
+           5. SYSTEME DE MODALE POUR AFFICHER LES DIPLÔMES
+        ------------------------------------------------------ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 100px 0;
-            border-bottom: 1px solid rgba(55, 65, 81, 0.3);
-        }
-
-        .section-header {
-            margin-bottom: 50px;
-        }
-
-        .section-tag {
-            font-family: var(--font-mono);
-            color: var(--cisco-blue);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        /* SECTION ACCUEIL - HERO */
-        .hero-wrapper {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 50px;
             align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
-
-        .avatar-frame {
-            position: relative;
-            width: 180px;
-            height: 180px;
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 24px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-box {
             background: var(--bg-sidebar);
-        }
-
-        .status-badge {
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #111827;
             border: 1px solid var(--border-color);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-family: var(--font-mono);
-            font-size: 10px;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--terminal-green);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse { 50% { opacity: 0.4; } }
-
-        .hero-text h1 {
-            font-size: 56px;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            margin-bottom: 15px;
-        }
-
-        .hero-text h1 span {
-            color: var(--cisco-blue);
-        }
-
-        .hero-text h3 {
-            font-size: 22px;
-            font-weight: 500;
-            color: var(--text-body);
-            margin-bottom: 25px;
-        }
-
-        .hero-text p {
-            font-size: 16px;
-            color: var(--text-body);
-            line-height: 1.7;
-            max-width: 650px;
-            margin-bottom: 35px;
-        }
-
-        /* LOGOS ROUTAGE LIENS (GITHUB / LINKEDIN) */
-        .gateway-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .gateway-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background-color: var(--bg-sidebar);
-            color: var(--text-body);
-            text-decoration: none;
-            font-size: 18px;
-            transition: all 0.2s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .gateway-btn:hover {
-            color: var(--text-pure);
-            border-color: var(--cisco-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 180, 216, 0.15);
-        }
-
-        /* GRILLES DE CARTES ÉPURÉES */
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .clean-card {
-            background-color: var(--bg-sidebar);
-            border: 1px solid var(--border-color);
-            padding: 35px;
+            width: 90%;
+            max-width: 600px;
             border-radius: 16px;
-            transition: border-color 0.3s, transform 0.3s;
+            padding: 30px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        .clean-card:hover {
-            border-color: rgba(0, 180, 216, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .clean-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .clean-card p {
-            color: var(--text-body);
-            font-size: 14px;
-            line-height: 1.6;
-        }
+        .modal-overlay.active .modal-box { transform: scale(1); }
+        .close-modal { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--text-body); font-size: 20px; cursor: pointer; }
+        .close-modal:hover { color: var(--text-pure); }
+        .modal-title { font-size: 20px; margin-bottom: 15px; color: var(--text-pure); padding-right: 25px; }
+        .modal-img-wrapper { background: #0b0f19; width: 100%; height: 300px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 15px; }
+        .modal-img-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        .modal-meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-body); background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
             body { flex-direction: column; }
-            sidebar { width: 100%; height: auto; position: relative; padding: 30px; }
-            main { margin-left: 0; width: 100%; padding: 0 30px; }
+            sidebar { width: 100%; height: auto; position: relative; padding: 25px; }
+            main { margin-left: 0; width: 100%; padding: 0 25px; }
             .hero-wrapper { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-            .hero-text p { margin: 0 auto 35px auto; }
+            .hero-text p { margin: 0 auto 30px auto; }
             .gateway-links { justify-content: center; }
+            .xp-header { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -427,13 +301,14 @@
             <li><a href="#competences"><i class="fa-solid fa-layer-group"></i> Stack Tech</a></li>
             <li><a href="#certifications"><i class="fa-solid fa-shield-halved"></i> Certificats</a></li>
             <li><a href="#projets"><i class="fa-solid fa-folder-open"></i> Réalisations</a></li>
+            <li><a href="#experiences"><i class="fa-solid fa-briefcase"></i> Expériences</a></li>
             <li><a href="#interets"><i class="fa-solid fa-network-wired"></i> Intérêts</a></li>
             <li><a href="#blog"><i class="fa-solid fa-book-open-reader"></i> Blog</a></li>
             <li><a href="#contact"><i class="fa-solid fa-paper-plane"></i> Establish Link</a></li>
         </ul>
 
         <div style="font-family: var(--font-mono); font-size: 11px; color: #4b5563;">
-            SYS_STATUS: READY
+            SYS_STATUS: ONLINE
         </div>
     </sidebar>
 
@@ -442,7 +317,7 @@
         <section id="accueil">
             <div class="hero-wrapper">
                 <div class="avatar-frame">
-                    <img src="photo.jpg" alt="Identity Asset" class="avatar-img" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80';">
+                    <img src="photo.jpg" alt="Photo de Profil" class="avatar-img" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80';">
                     <div class="status-badge">
                         <div class="status-dot"></div>
                         <span>STATUS: ACTIVE_DISCOVERY</span>
@@ -450,9 +325,9 @@
                 </div>
                 <div class="hero-text">
                     <h1>Je suis <span>[Ton Prénom]</span></h1>
-                    <h3>Spécialiste Infrastructures Réseaux & Systèmes</h3>
+                    <h3>Spécialiste Infrastructures Réseaux & Systèmes Connectés</h3>
                     <p>
-                        Passionné par l'acheminement des paquets de données et la sécurité des infrastructures, j'automatise, je déploie et je supervise. Mon objectif est d'évoluer vers le poste de <strong>[Métier Cible, ex: Architecte Réseau & Cloud Sec]</strong>.
+                        Spécialisé dans le déploiement d'architectures informatiques résilientes, la maintenance des systèmes critiques et la sécurisation des infrastructures. J'allie des compétences solides en administration réseau (routing/switching), cybersécurité applicative, et électronique de pointe (diagnostic au composant).
                     </p>
                     
                     <div class="gateway-links">
@@ -472,64 +347,291 @@
             </div>
             <div class="showcase-grid">
                 <div class="clean-card">
-                    <span style="font-family: var(--font-mono); color: var(--cisco-blue); font-size: 12px;">2024 - 2026</span>
-                    <h3 style="margin-top: 5px;">[Intitulé de ton diplôme]</h3>
-                    <p>[Nom de ton École ou Université]. Spécialisation réseaux, protocoles de routage dynamique et administration des systèmes.</p>
+                    <span style="font-family: var(--font-mono); color: var(--cisco-blue); font-size: 12px;">Parcours Réseaux & Systèmes</span>
+                    <h3 style="margin-top: 5px;">[Intitulé de ton diplôme ou École]</h3>
+                    <p>Apprentissage des architectures systèmes, de la gestion de parc informatique automatisée, de la sécurité des périmètres informatiques et de la conception hardware.</p>
                 </div>
             </div>
         </section>
 
         <section id="competences">
             <div class="section-header">
-                <span class="section-tag">/ Capabilities</span>
+                <span class="section-tag">/ Stack Tech & Capabilities</span>
                 <h2 class="section-title">Compétences Techniques</h2>
             </div>
-            <div class="showcase-grid">
-                <div class="clean-card">
-                    <h3>Architecture Réseau</h3>
-                    <p>Routage & Commutation de niveau 2/3, protocoles (OSPF, BGP, Spanning-Tree), design d'architectures résilientes.</p>
+            
+            <div class="skill-group">
+                <h4><i class="fa-solid fa-network-wired"></i> Infrastructures, Réseaux & Systèmes Connectés</h4>
+                <div class="badge-container">
+                    <span class="skill-badge">Linux (Debian/Ubuntu)</span>
+                    <span class="skill-badge">Windows Server (Active Directory, DNS, DHCP)</span>
+                    <span class="skill-badge">Architecture TCP/IP</span>
+                    <span class="skill-badge">VLAN & Subnetting/VLSM</span>
+                    <span class="skill-badge">Routage & Firewalls</span>
+                    <span class="skill-badge">Wireshark (Analyse de trafic)</span>
+                    <span class="skill-badge">Cisco Packet Tracer</span>
+                    <span class="skill-badge">Câblage structuré de baies IT</span>
+                    <span class="skill-badge">GLPI & FusionInventory</span>
                 </div>
-                <div class="clean-card">
-                    <h3>Environnement Système</h3>
-                    <p>Administration avancée Unix/Linux, Scripting d'automatisation Bash/Python, virtualisation et conteneurisation.</p>
+            </div>
+
+            <div class="skill-group">
+                <h4><i class="fa-solid fa-microchip"></i> Électronique & Maintenance</h4>
+                <div class="badge-container">
+                    <span class="skill-badge">Diagnostic de pannes complexes</span>
+                    <span class="skill-badge">Micro-soudure au composant</span>
+                    <span class="skill-badge">Réparation de cartes électroniques</span>
+                    <span class="skill-badge">Proteus & MultiSim</span>
+                    <span class="skill-badge">AVR Studio & Arduino Prototypage</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h4><i class="fa-solid fa-shield-halved"></i> Cybersécurité & Données</h4>
+                <div class="badge-container">
+                    <span class="skill-badge">Analyse des menaces</span>
+                    <span class="skill-badge">Solutions Antivirus/EDR</span>
+                    <span class="skill-badge">Durcissement des accès</span>
+                    <span class="skill-badge">Cryptographie (Symétrique/Asymétrique)</span>
+                    <span class="skill-badge">PKI (Infrastructures clés publiques)</span>
+                    <span class="skill-badge">Bases de données relationnelles (SQL)</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <h4><i class="fa-solid fa-code"></i> Programmation & Intelligence Artificielle</h4>
+                <div class="badge-container">
+                    <span class="skill-badge">Python (Intermédiaire)</span>
+                    <span class="skill-badge">C / C++</span>
+                    <span class="skill-badge">JavaScript</span>
+                    <span class="skill-badge">Assembleur</span>
+                    <span class="skill-badge">Algorithme de Pathfinding A*</span>
+                    <span class="skill-badge">Réseaux de neurones (Perceptron)</span>
                 </div>
             </div>
         </section>
 
         <section id="certifications">
             <div class="section-header">
-                <span class="section-tag">/ Validations</span>
+                <span class="section-tag">/ Validations Officielles</span>
                 <h2 class="section-title">Certifications</h2>
             </div>
             <div class="showcase-grid">
+
                 <div class="clean-card">
-                    <h3>Cisco CCNA (200-301)</h3>
-                    <p>Validation officielle des compétences fondamentales en réseaux IP, connectivité IP, services IP et sécurité.</p>
+                    <i class="fa-solid fa-award" style="color: var(--cisco-blue); font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>BIA - Mention Très Bien</h3>
+                    <p>Brevet d'Initiation Aéronautique</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">SIEC - Maison des examens</span>
+                        <button class="view-cert-btn" onclick="openCertModal('BIA - Mention Très Bien', 'SIEC - Maison des examens', 'Examen d\'État officiel.', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=BIA+Diplome')">Afficher</button>
+                    </div>
                 </div>
+
+                <div class="clean-card">
+                    <i class="fa-brands fa-microsoft" style="color: #00a4ef; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Gérer les réseaux avec Confiance zéro</h3>
+                    <p>Architecture de sécurité Zero-Trust</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">Microsoft</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Gérer les réseaux avec Confiance zéro', 'Microsoft', 'Validation des concepts de micro-segmentation et contrôle d\'accès continu.', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Microsoft+Zero+Trust')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-brands fa-microsoft" style="color: #00a4ef; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Composants clés d’infrastructure de Datacenter</h3>
+                    <p>Matériel et infrastructure des centres de données</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">Microsoft</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Composants clés d\'infrastructure de Datacenter', 'Microsoft', 'Identification des architectures matérielles de calcul et de stockage.', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Microsoft+Datacenter')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-brands fa-microsoft" style="color: #00a4ef; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Fundamentals of Computer Networking</h3>
+                    <p>Bases fondamentales des réseaux informatiques</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">Microsoft</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Fundamentals of Computer Networking', 'Microsoft', 'Bases théoriques et pratiques des réseaux informatiques.', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Microsoft+Networking')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-solid fa-shield-halved" style="color: #de1f26; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Getting Started in Cybersecurity 3.0</h3>
+                    <p>Émise en mars 2026</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">Fortinet</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Getting Started in Cybersecurity 3.0', 'Fortinet', 'Émise le : Mars 2026', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Fortinet+Cyber')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-solid fa-network-wired" style="color: #049fd9; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Introduction à la Cybersécurité</h3>
+                    <p>Émise en mars 2026</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">Cisco NetAcad</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Introduction à la Cybersécurité', 'Cisco Networking Academy', 'Émise le : Mars 2026', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Cisco+Introduction+Cyber')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-solid fa-network-wired" style="color: #049fd9; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Network Basics</h3>
+                    <p>Émise en juil. 2025</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">Cisco NetAcad</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Network Basics', 'Cisco Networking Academy', 'Émise le : Juil. 2025', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Cisco+Network+Basics')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-solid fa-graduation-cap" style="color: #7451eb; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Créez votre site web avec HTML5/CSS3</h3>
+                    <p>Émise en sept. 2024</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">OpenClassrooms</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Créez votre site web avec HTML5 et CSS3', 'OpenClassrooms', 'ID Diplôme : 7839643067 | Sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=OpenClassrooms+HTML5+CSS3')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-solid fa-graduation-cap" style="color: #7451eb; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Découvrez l'univers de la cybersécurité</h3>
+                    <p>Émise en sept. 2024</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">OpenClassrooms</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Découvrez l\'univers de la cybersécurité', 'OpenClassrooms', 'ID Diplôme : 1531289578 | Sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=OpenClassrooms+Cyber')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-solid fa-graduation-cap" style="color: #7451eb; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Comprendre le web</h3>
+                    <p>Émise en sept. 2024</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">OpenClassrooms</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Comprendre le web', 'OpenClassrooms', 'ID Diplôme : 9414539583 | Sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=OpenClassrooms+Comprendre+le+Web')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-solid fa-language" style="color: #f1c40f; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>CERTIFICATION CLOE FLE</h3>
+                    <p>Émise en mai 2025</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">CERTIFICATIONS CLOE</span>
+                        <button class="view-cert-btn" onclick="openCertModal('CERTIFICATION CLOE FLE', 'CERTIFICATIONS CLOE', 'ID Diplôme : 75477 | Mai 2025', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Certification+CLOE')">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="clean-card">
+                    <i class="fa-solid fa-user-shield" style="color: #34495e; font-size: 24px; margin-bottom:10px;"></i>
+                    <h3>Bases en prévention des risques</h3>
+                    <p>Émise en oct. 2025</p>
+                    <div class="cert-footer">
+                        <span class="cert-org">INRS France</span>
+                        <button class="view-cert-btn" onclick="openCertModal('Bases en prévention des risques professionnels', 'INRS France', 'ID Diplôme : 328299 | Oct. 2025', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=INRS+France+Risques')">Afficher</button>
+                    </div>
+                </div>
+
             </div>
         </section>
 
         <section id="projets">
             <div class="section-header">
-                <span class="section-tag">/ Réalisations</span>
-                <h2 class="section-title">Projets Déployés</h2>
+                <span class="section-tag">/ Académiques & Personnels</span>
+                <h2 class="section-title">Projets Réalisés</h2>
             </div>
             <div class="showcase-grid">
                 <div class="clean-card">
-                    <h3>Refonte LAN multisites (GNS3)</h3>
-                    <p>Maquettage complet d'une architecture d'entreprise résiliente intégrant routage OSPF multi-aires et tolérance aux pannes HSRP.</p>
+                    <span style="font-family: var(--font-mono); color: var(--terminal-green); font-size: 11px;">[Projet Académique]</span>
+                    <h3 style="margin-top:5px;">Gestion de parc informatique (GLPI)</h3>
+                    <p>Installation et configuration d’un serveur GLPI couplé à l’agent FusionInventory. Automatisation complète de l’inventaire matériel/logiciel, centralisation de la gestion des actifs et simulation complète d’un environnement d’helpdesk (Ticketing).</p>
                 </div>
+                <div class="clean-card">
+                    <span style="font-family: var(--font-mono); color: var(--terminal-green); font-size: 11px;">[Projet Académique]</span>
+                    <h3 style="margin-top:5px;">Implémentation d’Algorithmes d’IA</h3>
+                    <p>Développement d’un algorithme Perceptron en Python pour appréhender le fonctionnement des réseaux de neurones. Implémentation complète de l’algorithme A* (Pathfinding) appliqué à l'optimisation de trajets complexes.</p>
+                </div>
+                <div class="clean-card">
+                    <span style="font-family: var(--font-mono); color: var(--cisco-blue); font-size: 11px;">[Projet Cisco]</span>
+                    <h3 style="margin-top:5px;">Configuration & Sécurisation Réseau</h3>
+                    <p>Conception complète et déploiement d’architectures réseau hautement sécurisées : architecture de segmentation par VLANs et mise en œuvre du routage inter-VLAN sécurisé.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiences">
+            <div class="section-header">
+                <span class="section-tag">/ Parcours Terrain</span>
+                <h2 class="section-title">Expériences Professionnelles</h2>
+            </div>
+            <div class="xp-timeline">
+                
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div>
+                            <h3>Technicien de Maintenance Systèmes Critiques</h3>
+                            <p style="color: var(--text-body); font-size: 14px;">Hôpital de Zone de Ouidah</p>
+                        </div>
+                        <span class="xp-date">Juin – Août 2024</span>
+                    </div>
+                    <ul>
+                        <li>Maintenance préventive et corrective sur des équipements médicaux électroniques de pointe.</li>
+                        <li>Diagnostic de pannes complexes, lecture experte de schémas électriques/électroniques et réparation de cartes au composant.</li>
+                        <li>Câblage minutieux et vérification complète des connexions d’alimentation des dispositifs pour assurer une parfaite continuité de service.</li>
+                    </ul>
+                    <div class="xp-result">✔ Résultat : Réduction de 15 % du temps d'arrêt des dispositifs grâce à un suivi proactif des interventions.</div>
+                </div>
+
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div>
+                            <h3>Technicien de Maintenance & Suivi de Parc</h3>
+                            <p style="color: var(--text-body); font-size: 14px;">Hôpital de Zone d'Adjohoun</p>
+                        </div>
+                        <span class="xp-date">Août – Sept. 2023</span>
+                    </div>
+                    <ul>
+                        <li>Élaboration complète de nouveaux protocoles de maintenance visant à fiabiliser drastiquement la disponibilité du matériel critique.</li>
+                        <li>Gestion rigoureuse des inventaires d'actifs et documentation technique structurée de l'ensemble des interventions.</li>
+                        <li>Support technique de proximité au profit du personnel soignant (Hardware système et infrastructures réseaux/informatiques de l'hôpital).</li>
+                    </ul>
+                </div>
+
+                <div class="xp-card">
+                    <div class="xp-header">
+                        <div>
+                            <h3>Stagiaire Technicien de Maintenance</h3>
+                            <p style="color: var(--text-body); font-size: 14px;">CHUD-OP</p>
+                        </div>
+                        <span class="xp-date">Août – Sept. 2022</span>
+                    </div>
+                    <ul>
+                        <li>Exécution de la maintenance préventive planifiée des équipements médicaux et rédaction de rapports techniques de synthèse.</li>
+                        <li>Initiation pratique aux interventions électriques/électroniques délicates et suivi minutieux des non-conformités matérielles constatées.</li>
+                        <li>Assimilation approfondie des exigences strictes de fiabilité propres aux systèmes critiques et à leur alimentation électrique.</li>
+                    </ul>
+                </div>
+
             </div>
         </section>
 
         <section id="interets">
             <div class="section-header">
-                <span class="section-tag">/ Domaines d'Intérêt</span>
+                <span class="section-tag">/ Domaines Hors-Piste</span>
                 <h2 class="section-title">Centres d'intérêt</h2>
             </div>
-            <p style="color: var(--text-body); max-width: 600px; line-height: 1.8;">
-                Cybersécurité (Exercices de type CTF), veille continue sur les nouvelles technologies réseaux/cloud, domotique et architectures hardware.
-            </p>
+            <div class="badge-container">
+                <span class="skill-badge"><i class="fa-solid fa-music" style="margin-right:6px; color: var(--cisco-blue)"></i> Musique</span>
+                <span class="skill-badge"><i class="fa-solid fa-futbol" style="margin-right:6px; color: var(--cisco-blue)"></i> Football</span>
+                <span class="skill-badge"><i class="fa-solid fa-book" style="margin-right:6px; color: var(--cisco-blue)"></i> Lecture</span>
+                <span class="skill-badge"><i class="fa-solid fa-book-open" style="margin-right:6px; color: var(--cisco-blue)"></i> Manga</span>
+            </div>
         </section>
 
         <section id="blog">
@@ -537,7 +639,7 @@
                 <span class="section-tag">/ Réflexions Tech</span>
                 <h2 class="section-title">Articles de Blog</h2>
             </div>
-            <p style="color: var(--text-body);">Aucun paquet publié pour le moment. Section en cours de routage.</p>
+            <p style="color: var(--text-body); font-family: var(--font-mono);">[Aucun paquet publié pour le moment. Section en cours de routage...]</p>
         </section>
 
         <section id="contact">
@@ -546,7 +648,7 @@
                 <h2 class="section-title">Me Contacter</h2>
             </div>
             <div class="clean-card" style="max-width: 500px;">
-                <p style="margin-bottom: 20px;">Le port d'écoute est ouvert. Envoyez un message direct pour échanger sur vos projets ou opportunités.</p>
+                <p style="margin-bottom: 20px;">Le port d'écoute est ouvert. Envoyez un message pour échanger sur vos projets informatiques ou opportunités professionnelles.</p>
                 <a href="mailto:ton.email@adresse.com" style="color: var(--cisco-blue); text-decoration: none; font-family: var(--font-mono); font-weight: 500;">
                     <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> ton.email@adresse.com
                 </a>
@@ -554,21 +656,44 @@
         </section>
     </main>
 
+    <div class="modal-overlay" id="certModal" onclick="closeCertModal(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="closeCertModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title" id="modalTitle">Diplôme</h3>
+            <div class="modal-img-wrapper">
+                <img id="modalImg" src="" alt="Aperçu du diplôme">
+            </div>
+            <div class="modal-meta" id="modalMeta">Organisation : </div>
+        </div>
+    </div>
+
     <script>
+        // Gestion de l'écran de chargement (Packet Tracer animation)
         window.addEventListener('load', function () {
             const loader = document.getElementById('loader');
             const logs = document.querySelector('.console-logs');
             
-            // Simule un changement de texte console réaliste avant de fermer
             setTimeout(() => {
                 logs.innerHTML = 'Tunnel Established. Access Granted. <span class="console-cursor">█</span>';
-            }, 800);
+            }, 700);
 
             setTimeout(() => {
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-            }, 1600); 
+            }, 1400); 
         });
+
+        // Fonctions pour gérer l'affichage de tes diplômes au clic
+        function openCertModal(title, organizer, metaText, imgUrl) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMeta').innerHTML = `<strong>Émetteur :</strong> ${organizer} <br> <strong>Détails :</strong> ${metaText}`;
+            document.getElementById('modalImg').src = imgUrl;
+            document.getElementById('certModal').classList.add('active');
+        }
+
+        function closeCertModal(event) {
+            document.getElementById('certModal').classList.remove('active');
+        }
     </script>
 </body>
 </html>
