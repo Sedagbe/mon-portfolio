@@ -168,6 +168,15 @@
         .nav-menu a:hover i { color: var(--cisco-blue); transform: translateX(2px); }
         .nav-menu i { width: 18px; transition: transform 0.2s; }
 
+        /* STYLE RAJOUTÉ POUR LE BAS DE LA BARRE LATÉRALE */
+        .sidebar-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+        }
+
         /* ------------------------------------------------------
            4. CONTENU PRINCIPAL & CARTES
         ------------------------------------------------------ */
@@ -188,11 +197,11 @@
         .hero-text h1 { font-size: 48px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
         .hero-text h1 span { color: var(--cisco-blue); }
         .hero-text h3 { font-size: 20px; font-weight: 500; color: var(--text-body); margin-bottom: 20px; }
-        .hero-text p { font-size: 15px; color: var(--text-body); line-height: 1.6; max-width: 680px; margin-bottom: 30px; }
+        .hero-text p { font-size: 15px; color: var(--text-body); line-height: 1.6; max-width: 680px; margin-bottom: 20px; }
 
         /* SOCIAUX LIENS */
-        .gateway-links { display: flex; gap: 12px; }
-        .gateway-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background-color: var(--bg-sidebar); color: var(--text-body); text-decoration: none; font-size: 16px; transition: all 0.2s ease; border: 1px solid var(--border-color); }
+        .gateway-links { display: flex; gap: 10px; }
+        .gateway-btn { display: flex; align-items: center; justify-content: center; width: 100%; height: 40px; border-radius: 8px; background-color: var(--bg-sidebar); color: var(--text-body); text-decoration: none; font-size: 16px; transition: all 0.2s ease; border: 1px solid var(--border-color); }
         .gateway-btn:hover { color: var(--text-pure); border-color: var(--cisco-blue); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 180, 216, 0.15); }
 
         /* GRID SYSTEM */
@@ -279,8 +288,15 @@
             <li><a href="#contact"><i class="fa-solid fa-paper-plane"></i> Establish Link</a></li>
         </ul>
 
-        <div style="font-family: var(--font-mono); font-size: 11px; color: #4b5563;">
-            SYS_STATUS: ONLINE
+        <div class="sidebar-footer">
+            <div class="gateway-links">
+                <a href="https://github.com" target="_blank" class="gateway-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://gitlab.com" target="_blank" class="gateway-btn" title="GitLab"><i class="fa-brands fa-gitlab"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="gateway-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: #4b5563;">
+                SYS_STATUS: ONLINE
+            </div>
         </div>
     </sidebar>
 
@@ -298,27 +314,24 @@
                 <div class="hero-text">
                     <h1>Je suis <span>Kenneth OUSSOU LIO</span></h1>
                     <h3>Étudiant en cybersécurité, réseaux informatiques et IA</h3>
-                    <p>
-    Concevoir, connecter et sécuriser des infrastructures réseau est bien plus qu'un domaine d'étude pour moi : c'est une véritable passion.
-</p>
-
-<p>
-    J'aime imaginer des architectures réseau, concevoir des topologies, interconnecter des systèmes et résoudre des problématiques complexes. Les heures passées sur <strong>Cisco Packet Tracer</strong> ont confirmé une chose : je souhaite faire de la conception d'infrastructures réseau mon métier.
-</p>
-
-<p>
-    Mon parcours présente une particularité qui constitue aujourd'hui un véritable atout. Avant de me spécialiser dans les réseaux informatiques, j'ai travaillé dans l'électronique et la maintenance d'équipements hospitaliers au Bénin. Cette expérience m'a permis d'acquérir une compréhension concrète du fonctionnement des machines, du câblage, de l'alimentation électrique et des contraintes du terrain.
-</p>
-
-<p>
-    Elle m'a appris qu'un système fiable repose autant sur des bases matérielles solides que sur une architecture logicielle bien pensée. Aujourd'hui, je poursuis mes études en <strong>réseaux informatiques</strong>, <strong>cybersécurité</strong> et <strong>intelligence artificielle</strong> afin de développer une expertise complète dans la conception et la sécurisation des infrastructures numériques.
-</p>
-
-<p>
-    Mon objectif est de concevoir, déployer et sécuriser des infrastructures réseau performantes, résilientes et adaptées aux enjeux des entreprises, avant d'évoluer vers un poste d'<strong>Architecte Réseaux & Sécurité</strong>.
-</p>
                     
-                    <div class="gateway-links">
+                    <p>
+                        Concevoir, connecter et sécuriser des infrastructures réseau est bien plus qu'un domaine d'étude pour moi : c'est une véritable passion.
+                    </p>
+                    <p>
+                        J'aime imaginer des architectures réseau, concevoir des topologies, interconnecter des systèmes et résoudre des problématiques complexes. Les heures passées sur <strong>Cisco Packet Tracer</strong> ont confirmé une chose : je souhaite faire de la conception d'infrastructures réseau mon métier.
+                    </p>
+                    <p>
+                        Mon parcours présente une particularité qui constitue aujourd'hui un véritable atout. Avant de me spécialiser dans les réseaux informatiques, j'ai travaillé dans l'électronique et la maintenance d'équipements hospitaliers au Bénin. Cette expérience m'a permis d'acquérir une compréhension concrète du fonctionnement des machines, du câblage, de l'alimentation électrique et des contraintes du terrain.
+                    </p>
+                    <p>
+                        Elle m'a appris qu'un système fiable repose autant sur des bases matérielles solides que sur une architecture logicielle bien pensée. Aujourd'hui, je poursuis mes études en <strong>réseaux informatiques</strong>, <strong>cybersécurité</strong> et <strong>intelligence artificielle</strong> afin de développer une expertise complète dans la conception et la sécurisation des infrastructures numériques.
+                    </p>
+                    <p>
+                        Mon objectif est de concevoir, déployer et sécuriser des infrastructures réseau performantes, résilientes et adaptées aux enjeux des entreprises, avant d'évoluer vers un poste d'<strong>Architecte Réseaux & Sécurité</strong>.
+                    </p>
+                    
+                    <div class="gateway-links" style="max-width: 180px; margin-top: 15px;">
                         <a href="https://github.com" target="_blank" class="gateway-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
                         <a href="https://gitlab.com" target="_blank" class="gateway-btn" title="GitLab"><i class="fa-brands fa-gitlab"></i></a>
                         <a href="https://linkedin.com" target="_blank" class="gateway-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
