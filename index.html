@@ -184,7 +184,6 @@
         .avatar-img { width: 100%; height: 100%; border-radius: 24px; object-fit: cover; border: 1px solid var(--border-color); background: var(--bg-sidebar); }
         .status-badge { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: #111827; border: 1px solid var(--border-color); padding: 4px 12px; border-radius: 20px; font-family: var(--font-mono); font-size: 9px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
         .status-dot { width: 6px; height: 6px; background-color: var(--terminal-green); border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 50% { opacity: 0.3; } }
 
         .hero-text h1 { font-size: 48px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
         .hero-text h1 span { color: var(--cisco-blue); }
@@ -202,27 +201,19 @@
         .clean-card:hover { border-color: rgba(0, 180, 216, 0.3); transform: translateY(-2px); }
         .clean-card h3 { font-size: 17px; margin-bottom: 8px; font-weight: 600; color: var(--text-pure); }
         .clean-card p { color: var(--text-body); font-size: 13.5px; line-height: 1.5; margin-bottom: 10px; }
-        
-        /* MINIATURE DESIGN */
-        .cert-thumb {
-            width: 100%;
-            height: 100px;
-            background: #0f172a;
-            border: 1px dashed var(--border-color);
-            border-radius: 8px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: var(--text-body);
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .cert-id { font-family: var(--font-mono); font-size: 11px; color: var(--text-body); background: rgba(255,255,255,0.02); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); display: inline-block; margin-top: 5px;}
+
+        /* AJOUT LOGOS REELS */
+        .brand-logo {
+            height: 28px;
+            max-width: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: grayscale(20%) brightness(95%);
+            transition: filter 0.3s ease;
         }
-        .cert-thumb:hover {
-            border-color: var(--cisco-blue);
-            color: var(--text-pure);
-            background: rgba(0, 180, 216, 0.05);
+        .clean-card:hover .brand-logo {
+            filter: grayscale(0%) brightness(100%);
         }
 
         /* TIMELINE EXPERIENCES */
@@ -242,45 +233,8 @@
         /* CERTIFICATION SPECIFIC BUTTONS */
         .cert-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
         .cert-org { font-family: var(--font-mono); font-size: 11px; color: var(--cisco-blue); text-transform: uppercase; }
-        .view-cert-btn { background: rgba(0, 180, 216, 0.1); border: 1px solid var(--cisco-blue); color: var(--text-pure); font-size: 12px; padding: 5px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
-        .view-cert-btn:hover { background: var(--cisco-blue); color: #000; font-weight: 600; }
-
-        /* ------------------------------------------------------
-           5. SYSTEME DE MODALE POUR AFFICHER LES DIPLÔMES
-        ------------------------------------------------------ */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-box {
-            background: var(--bg-sidebar);
-            border: 1px solid var(--border-color);
-            width: 90%;
-            max-width: 600px;
-            border-radius: 16px;
-            padding: 30px;
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .modal-overlay.active .modal-box { transform: scale(1); }
-        .close-modal { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--text-body); font-size: 20px; cursor: pointer; }
-        .close-modal:hover { color: var(--text-pure); }
-        .modal-title { font-size: 20px; margin-bottom: 15px; color: var(--text-pure); padding-right: 25px; }
-        .modal-img-wrapper { background: #0b0f19; width: 100%; height: 350px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 15px; }
-        .modal-img-wrapper img { width: 100%; height: 100%; object-fit: contain; }
-        .modal-meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-body); background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); line-height: 1.5; }
+        .view-cert-link { background: rgba(0, 180, 216, 0.1); border: 1px solid var(--cisco-blue); color: var(--text-pure); font-size: 12px; padding: 6px 14px; border-radius: 6px; text-decoration: none; text-align: center; transition: all 0.2s; font-weight: 500; }
+        .view-cert-link:hover { background: var(--cisco-blue); color: #000; font-weight: 600; }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
@@ -296,6 +250,7 @@
 </head>
 <body>
 
+    <!-- ANIMATION PACKET TRACER LOADER -->
     <div id="loader">
         <div class="network-topology">
             <div class="network-node">
@@ -312,6 +267,7 @@
         <div class="console-logs">Establishing secure tunnel... <span class="console-cursor">█</span></div>
     </div>
 
+    <!-- SIDEBAR NAVIGATION -->
     <sidebar>
         <div class="logo-area">
             <div class="logo-dot"></div>
@@ -337,6 +293,7 @@
 
     <main>
 
+        <!-- ACCUEIL -->
         <section id="accueil">
             <div class="hero-wrapper">
                 <div class="avatar-frame">
@@ -363,6 +320,7 @@
             </div>
         </section>
         
+        <!-- FORMATIONS -->
         <section id="formations">
             <div class="section-header">
                 <span class="section-tag">/ Cursus Académique</span>
@@ -384,6 +342,7 @@
             </div>
         </section>
 
+        <!-- COMPÉTENCES -->
         <section id="competences">
             <div class="section-header">
                 <span class="section-tag">/ Stack Tech & Capabilities</span>
@@ -441,6 +400,7 @@
             </div>
         </section>
 
+        <!-- CERTIFICATIONS (LOGOS REELS INTEGRÉS) -->
         <section id="certifications">
             <div class="section-header">
                 <span class="section-tag">/ Validations Officielles</span>
@@ -450,160 +410,164 @@
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-award" style="color: #f1c40f; font-size: 24px; margin-bottom:10px;"></i>
+                        <!-- Logo SIEC / Île-de-France Éducation -->
+                        <img src="https://upload.wikimedia.org/wikipedia/fr/4/4c/Logotype_siec.svg" alt="SIEC" class="brand-logo">
                         <h3>BREVET D'INITIATION AERONAUTIQUE</h3>
                         <p>Mention Très Bien</p>
                     </div>
                     <div class="cert-footer">
-                        <span class="cert-org">SIEC - Maison des examens</span>
-                        <button class="view-cert-btn" onclick="openCertModal('BREVET D\'INITIATION AERONAUTIQUE - Mention Très Bien', 'SIEC - Maison des examens', 'Examen d\'État validé avec mention Très Bien.', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Diplome+BIA')">Afficher le diplôme</button>
+                        <span class="cert-org">SIEC</span>
+                        <a class="view-cert-link" href="#" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-brands fa-microsoft" style="color: #00a4ef; font-size: 24px; margin-bottom:10px;"></i>
+                        <!-- Logo Microsoft -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="brand-logo">
                         <h3>Gérer les réseaux avec Confiance zero</h3>
                         <p>Architecture et principes Zero-Trust.</p>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">Microsoft</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Gérer les réseaux avec Confiance zéro', 'Microsoft', 'Validation des infrastructures sécurisées basées sur le modèle Zero Trust.', 'https://learn.microsoft.com/fr-fr/users/oussoulioagboyinousdagbkenneth-2978/achievements/fepq4dhx')">Afficher le diplôme</button>
+                        <a class="view-cert-link" href="https://learn.microsoft.com/fr-fr/users/oussoulioagboyinousdagbkenneth-2978/achievements/fepq4dhx" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-brands fa-microsoft" style="color: #00a4ef; font-size: 24px; margin-bottom:10px;"></i>
-                        <h3>Identifier les composants clés de matériel et d’infrastructure informatique des centres de données</h3>
-                        <p>Hardware et architectures datacenters.</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="brand-logo">
+                        <h3>Infrastructure informatique des centres de données</h3>
+                        <p>Composants matériels des Datacenters.</p>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">Microsoft</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Identifier les composants clés de matériel et d’infrastructure informatique des centres de données', 'Microsoft', 'Analyse structurelle et matérielle des environnements serveurs critiques.', 'https://learn.microsoft.com/fr-fr/users/oussoulioagboyinousdagbkenneth-2978/achievements/u7zxsu83')">Afficher le diplôme</button>
+                        <a class="view-cert-link" href="https://learn.microsoft.com/fr-fr/users/oussoulioagboyinousdagbkenneth-2978/achievements/u7zxsu83" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-brands fa-microsoft" style="color: #00a4ef; font-size: 24px; margin-bottom:10px;"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="brand-logo">
                         <h3>Fundamentals of computer networking</h3>
                         <p>Bases fondamentales de l'ingénierie réseau.</p>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">Microsoft</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Fundamentals of computer networking', 'Microsoft', 'Principes et architectures de connectivité globale.', 'https://learn.microsoft.com/en-us/users/oussoulioagboyinousdagbkenneth-2978/achievements/nqezkk8f')">Afficher le diplôme</button>
+                        <a class="view-cert-link" href="https://learn.microsoft.com/en-us/users/oussoulioagboyinousdagbkenneth-2978/achievements/nqezkk8f" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-shield-halved" style="color: #de1f26; font-size: 24px; margin-bottom:10px;"></i>
+                        <!-- Logo Fortinet -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Fortinet_logo.svg" alt="Fortinet" class="brand-logo" style="max-width: 95px;">
                         <h3>Getting Started in Cybersecurity 3.0</h3>
                         <p>Émise le mars 2026</p>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">Fortinet</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Getting Started in Cybersecurity 3.0', 'Fortinet', 'Émise le : mars 2026', 'https://www.credly.com/badges/781b1911-4773-43a7-ace5-f57009ac131c/public_url')">Afficher le diplôme</button>
+                        <a class="view-cert-link" href="https://www.credly.com/badges/781b1911-4773-43a7-ace5-f57009ac131c/public_url" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-network-wired" style="color: #049fd9; font-size: 24px; margin-bottom:10px;"></i>
+                        <!-- Logo Cisco -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" class="brand-logo" style="height: 32px;">
                         <h3>Introduction à la Cybersécurité</h3>
                         <p>Émise le mars 2026</p>
                     </div>
                     <div class="cert-footer">
-                        <span class="cert-org">Cisco Networking Academy</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Introduction à la Cybersécurité', 'Cisco Networking Academy', 'Émise le : mars 2026', 'https://www.credly.com/badges/c072cd70-024c-4f46-ba64-c24a1dc7a99e/public_url')">Afficher le diplôme</button>
+                        <span class="cert-org">Cisco</span>
+                        <a class="view-cert-link" href="https://www.credly.com/badges/c072cd70-024c-4f46-ba64-c24a1dc7a99e/public_url" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-network-wired" style="color: #049fd9; font-size: 24px; margin-bottom:10px;"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" class="brand-logo" style="height: 32px;">
                         <h3>Network Basics</h3>
                         <p>Émise le juil. 2025</p>
                     </div>
                     <div class="cert-footer">
-                        <span class="cert-org">Cisco Networking Academy</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Network Basics', 'Cisco Networking Academy', 'Émise le : juil. 2025', 'https://www.credly.com/badges/6cbe9bdf-e52c-49fc-812a-be6cc87944be/public_url')">Afficher le diplôme</button>
+                        <span class="cert-org">Cisco</span>
+                        <a class="view-cert-link" href="https://www.credly.com/badges/6cbe9bdf-e52c-49fc-812a-be6cc87944be/public_url" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-graduation-cap" style="color: #7451eb; font-size: 24px; margin-bottom:10px;"></i>
+                        <!-- Logo OpenClassrooms -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_OpenClassrooms.png" alt="OpenClassrooms" class="brand-logo" style="height: 24px;">
                         <h3>Créez votre site web avec HTML5 et CSS3</h3>
                         <p>Émise le sept. 2024</p>
-                        <div class="cert-thumb" onclick="openCertModal('Créez votre site web avec HTML5 et CSS3', 'OpenClassrooms', 'ID unique : 7839643067 | Émise en sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Miniature+HTML5+CSS3')">
-                            <i class="fa-solid fa-image" style="margin-right: 6px;"></i> Miniature HTML5 & CSS3
-                        </div>
+                        <span class="cert-id">ID : 7839643067</span>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">OpenClassrooms</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Créez votre site web avec HTML5 et CSS3', 'OpenClassrooms', 'Identifiant du diplôme : 7839643067 <br> Émise le sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=OpenClassrooms+HTML5+CSS3')">Afficher le diplôme</button>
+                        <a class="view-cert-link" href="https://www.linkedin.com/in/kenneth-oussou-lio/" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-graduation-cap" style="color: #7451eb; font-size: 24px; margin-bottom:10px;"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_OpenClassrooms.png" alt="OpenClassrooms" class="brand-logo" style="height: 24px;">
                         <h3>Découvrez l'univers de la cybersécurité</h3>
                         <p>Émise le sept. 2024</p>
-                        <div class="cert-thumb" onclick="openCertModal('Découvrez l\'univers de la cybersécurité', 'OpenClassrooms', 'ID unique : 1531289578 | Émise en sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Miniature+Univers+Cyber')">
-                            <i class="fa-solid fa-image" style="margin-right: 6px;"></i> Miniature Univers de la Cyber
-                        </div>
+                        <span class="cert-id">ID : 1531289578</span>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">OpenClassrooms</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Découvrez l\'univers de la cybersécurité', 'OpenClassrooms', 'Identifiant du diplôme : 1531289578 <br> Émise le sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=OpenClassrooms+Cyber')">Afficher le diplôme</button>
+                        <a class="view-cert-link" href="#" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-graduation-cap" style="color: #7451eb; font-size: 24px; margin-bottom:10px;"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_OpenClassrooms.png" alt="OpenClassrooms" class="brand-logo" style="height: 24px;">
                         <h3>Comprendre le web</h3>
                         <p>Émise le sept. 2024</p>
-                        <div class="cert-thumb" onclick="openCertModal('Comprendre le web', 'OpenClassrooms', 'ID unique : 9414539583 | Émise en sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=Miniature+WEB')">
-                            <i class="fa-solid fa-image" style="margin-right: 6px;"></i> Miniature WEB
-                        </div>
+                        <span class="cert-id">ID : 9414539583</span>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">OpenClassrooms</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Comprendre le web', 'OpenClassrooms', 'Identifiant du diplôme : 9414539583 <br> Émise le sept. 2024', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=OpenClassrooms+Comprendre+Le+Web')">Afficher le diplôme</button>
+                        <a class="view-cert-link" href="#" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-language" style="color: #f1c40f; font-size: 24px; margin-bottom:10px;"></i>
+                        <!-- Icône générique élégante pour CLOE -->
+                        <div style="font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: #f1c40f; margin-bottom: 15px; letter-spacing: 1px;">[ CLOE Cert ]</div>
                         <h3>CERTIFICATION CLOE FLE</h3>
                         <p>Émise le mai 2025</p>
+                        <span class="cert-id">ID : 75477</span>
                     </div>
                     <div class="cert-footer">
-                        <span class="cert-org">CERTIFICATIONS CLOE</span>
-                        <button class="view-cert-btn" onclick="openCertModal('CERTIFICATION CLOE FLE', 'CERTIFICATIONS CLOE', 'Identifiant du diplôme : 75477 <br> Émise le mai 2025', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=CLOE+FLE+Cert')">Afficher le diplôme</button>
+                        <span class="cert-org">CLOE</span>
+                        <a class="view-cert-link" href="#" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <i class="fa-solid fa-user-shield" style="color: #34495e; font-size: 24px; margin-bottom:10px;"></i>
-                        <h3>Acquérir des bases en prévention des risques professionnels</h3>
+                        <!-- Icône de sécurité pour INRS -->
+                        <div style="font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: #34495e; margin-bottom: 15px; letter-spacing: 1px;">[ INRS France ]</div>
+                        <h3>Bases en prévention des risques professionnels</h3>
                         <p>Émise le oct. 2025</p>
+                        <span class="cert-id">ID : 328299</span>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">INRS France</span>
-                        <button class="view-cert-btn" onclick="openCertModal('Acquérir des bases en prévention des risques professionnels', 'INRS France', 'Identifiant du diplôme : 328299 <br> Émise le oct. 2025', 'https://via.placeholder.com/600x400/1e293b/00b4d8?text=INRS+France+Risques')">Afficher le diplôme</button>
+                        <a class="view-cert-link" href="#" target="_blank">Afficher</a>
                     </div>
                 </div>
 
             </div>
         </section>
 
+        <!-- PROJETS -->
         <section id="projets">
             <div class="section-header">
                 <span class="section-tag">/ Académiques & Personnels</span>
@@ -634,6 +598,7 @@
             </div>
         </section>
 
+        <!-- EXPERIENCES -->
         <section id="experiences">
             <div class="section-header">
                 <span class="section-tag">/ Parcours Terrain</span>
@@ -690,6 +655,7 @@
             </div>
         </section>
 
+        <!-- INTERETS -->
         <section id="interets">
             <div class="section-header">
                 <span class="section-tag">/ Domaines Hors-Piste</span>
@@ -703,6 +669,7 @@
             </div>
         </section>
 
+        <!-- BLOG -->
         <section id="blog">
             <div class="section-header">
                 <span class="section-tag">/ Réflexions Tech</span>
@@ -711,6 +678,7 @@
             <p style="color: var(--text-body); font-family: var(--font-mono);">[Aucun paquet publié pour le moment. Section en cours de routage...]</p>
         </section>
 
+        <!-- CONTACT -->
         <section id="contact">
             <div class="section-header">
                 <span class="section-tag">/ Initialiser la connexion</span>
@@ -724,17 +692,6 @@
             </div>
         </section>
     </main>
-
-    <div class="modal-overlay" id="certModal" onclick="closeCertModal(event)">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="close-modal" onclick="closeCertModal()"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal-title" id="modalTitle">Diplôme</h3>
-            <div class="modal-img-wrapper">
-                <img id="modalImg" src="" alt="Aperçu du diplôme">
-            </div>
-            <div class="modal-meta" id="modalMeta">Organisation : </div>
-        </div>
-    </div>
 
     <script>
         // Gestion de l'écran de chargement (Packet Tracer animation)
@@ -751,18 +708,6 @@
                 loader.style.visibility = 'hidden';
             }, 1400); 
         });
-
-        // Fonctions pour gérer l'affichage de tes diplômes au clic
-        function openCertModal(title, organizer, metaText, imgUrl) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalMeta').innerHTML = `<strong>Émetteur :</strong> ${organizer} <br> <strong>Détails :</strong> ${metaText}`;
-            document.getElementById('modalImg').src = imgUrl;
-            document.getElementById('certModal').classList.add('active');
-        }
-
-        function closeCertModal() {
-            document.getElementById('certModal').classList.remove('active');
-        }
     </script>
 </body>
 </html>
