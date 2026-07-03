@@ -11,17 +11,17 @@
     
     <style>
         /* ------------------------------------------------------
-           1. VARIABLES & DESIGN SYSTEM (Premium Dark)
+           1. SETUP VARIABLES & DESIGN SYSTEM (Premium Dark)
         ------------------------------------------------------ */
         :root {
-            --bg-main: #0b0f19;        
-            --bg-sidebar: #111827;     
-            --bg-card: #1f2937;        
+            --bg-main: #0b0f19;        /* Bleu nuit très profond */
+            --bg-sidebar: #111827;     /* Teinte menu de gauche */
+            --bg-card: #1f2937;        /* Fonds de cartes épurés */
             --text-pure: #ffffff;
-            --text-body: #9ca3af;       
-            --cisco-blue: #00b4d8;     
-            --terminal-green: #10b981; 
-            --border-color: #374151;   
+            --text-body: #9ca3af;       /* Gris adouci */
+            --cisco-blue: #00b4d8;     /* Liaison / Data active */
+            --terminal-green: #10b981; /* Ping success / LED Verte */
+            --border-color: #374151;   /* Lignes fines */
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -43,7 +43,7 @@
         }
 
         /* ------------------------------------------------------
-           2. ANIMATION PACKET TRACER (LOADER)
+           2. ANIMATION PACKET TRACER CINÉMATIQUE (LOADER)
         ------------------------------------------------------ */
         #loader {
             position: fixed;
@@ -130,7 +130,7 @@
         @keyframes blink { 50% { opacity: 0; } }
 
         /* ------------------------------------------------------
-           3. SIDEBAR NAVIGATION
+           3. SIDEBAR NAVIGATION 
         ------------------------------------------------------ */
         sidebar {
             width: 280px;
@@ -199,21 +199,22 @@
         .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .clean-card { background-color: var(--bg-sidebar); border: 1px solid var(--border-color); padding: 25px; border-radius: 14px; transition: border-color 0.25s, transform 0.25s; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
         .clean-card:hover { border-color: rgba(0, 180, 216, 0.3); transform: translateY(-2px); }
-        .clean-card h3 { font-size: 16px; margin-bottom: 8px; font-weight: 600; color: var(--text-pure); line-height: 1.4; }
-        .clean-card p { color: var(--text-body); font-size: 13px; line-height: 1.5; margin-bottom: 10px; }
+        .clean-card h3 { font-size: 17px; margin-bottom: 8px; font-weight: 600; color: var(--text-pure); }
+        .clean-card p { color: var(--text-body); font-size: 13.5px; line-height: 1.5; margin-bottom: 10px; }
         .cert-id { font-family: var(--font-mono); font-size: 11px; color: var(--text-body); background: rgba(255,255,255,0.02); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); display: inline-block; margin-top: 5px;}
 
-        /* BADGES VECTORIELS STYLISÉS */
-        .badge-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        /* ENTRAINEMENT DES LOGOS ET COHERENCE VISUELLE */
+        .brand-logo {
+            height: 35px;
+            max-width: 140px;
+            object-fit: contain;
             margin-bottom: 15px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: block;
+            filter: grayscale(10%) brightness(100%);
+            transition: transform 0.2s ease;
+        }
+        .clean-card:hover .brand-logo {
+            transform: scale(1.02);
         }
 
         /* TIMELINE EXPERIENCES */
@@ -400,7 +401,7 @@
             </div>
         </section>
 
-        <!-- CERTIFICATIONS (SANS AUCUNE IMAGE - CODE PUR 100% FONCTIONNEL) -->
+        <!-- CERTIFICATIONS (LOGOS OFFICIELS INTÉGRÉS ET TESTÉS) -->
         <section id="certifications">
             <div class="section-header">
                 <span class="section-tag">/ Validations Officielles</span>
@@ -410,21 +411,22 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #9b59b6;"><i class="fa-solid fa-building-columns"></i> SIEC Paris</div>
+                        <!-- Logo Éducation Nationale (le SIEC n'a pas de logo propre distinct : il délivre les diplômes au nom du Ministère) -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_de_l%27%C3%89ducation_nationale_%282020%29.svg" alt="SIEC - Maison des examens" class="brand-logo" style="height: 42px;" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/fr/thumb/1/10/Minist%C3%A8re_Education_Nationale_%28France%29.svg/512px-Minist%C3%A8re_Education_Nationale_%28France%29.svg.png';">
                         <h3>BREVET D'INITIATION AERONAUTIQUE</h3>
                         <p>Mention Très Bien</p>
                     </div>
                     <div class="cert-footer">
-                        <span class="cert-org">SIEC</span>
+                        <span class="cert-org">SIEC - Maison des examens</span>
                         <a class="view-cert-link" href="#" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #00a4ef;"><i class="fa-brands fa-microsoft"></i> Microsoft Learn</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="brand-logo">
                         <h3>Gérer les réseaux avec Confiance zero</h3>
-                        <p>Architecture, sécurité globale et principes fondamentaux du modèle Zero-Trust.</p>
+                        <p>Architecture et principes Zero-Trust.</p>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">Microsoft</span>
@@ -434,9 +436,9 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #00a4ef;"><i class="fa-brands fa-microsoft"></i> Microsoft Learn</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="brand-logo">
                         <h3>Infrastructure informatique des centres de données</h3>
-                        <p>Composants matériels critiques, serveurs et architectures physiques des Datacenters.</p>
+                        <p>Composants matériels des Datacenters.</p>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">Microsoft</span>
@@ -446,9 +448,9 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #00a4ef;"><i class="fa-brands fa-microsoft"></i> Microsoft Learn</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="brand-logo">
                         <h3>Fundamentals of computer networking</h3>
-                        <p>Bases fondamentales de l'ingénierie réseau et connectivité IP globale.</p>
+                        <p>Bases fondamentales de l'ingénierie réseau.</p>
                     </div>
                     <div class="cert-footer">
                         <span class="cert-org">Microsoft</span>
@@ -458,7 +460,8 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #ee2724;"><i class="fa-solid fa-shield-halved"></i> Fortinet NSE</div>
+                        <!-- Logo Fortinet officiel (chemin Wikimedia Commons corrigé) -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg" alt="Fortinet" class="brand-logo" style="max-width: 110px; filter: brightness(0) invert(1);" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/a/a3/Fortinet_logo_red.svg';">
                         <h3>Getting Started in Cybersecurity 3.0</h3>
                         <p>Émise le mars 2026</p>
                     </div>
@@ -470,31 +473,31 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #049fd9;"><i class="fa-solid fa-network-wired"></i> Cisco Academy</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" class="brand-logo" style="height: 35px;">
                         <h3>Introduction à la Cybersécurité</h3>
                         <p>Émise le mars 2026</p>
                     </div>
                     <div class="cert-footer">
-                        <span class="cert-org">Cisco</span>
+                        <span class="cert-org">Cisco NetAcad</span>
                         <a class="view-cert-link" href="https://www.credly.com/badges/c072cd70-024c-4f46-ba64-c24a1dc7a99e/public_url" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #049fd9;"><i class="fa-solid fa-network-wired"></i> Cisco Academy</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco" class="brand-logo" style="height: 35px;">
                         <h3>Network Basics</h3>
                         <p>Émise le juil. 2025</p>
                     </div>
                     <div class="cert-footer">
-                        <span class="cert-org">Cisco</span>
+                        <span class="cert-org">Cisco NetAcad</span>
                         <a class="view-cert-link" href="https://www.credly.com/badges/6cbe9bdf-e52c-49fc-812a-be6cc87944be/public_url" target="_blank">Afficher</a>
                     </div>
                 </div>
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #7451eb;"><i class="fa-solid fa-graduation-cap"></i> OpenClassrooms</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_OpenClassrooms.png" alt="OpenClassrooms" class="brand-logo" style="height: 24px;">
                         <h3>Créez votre site web avec HTML5 et CSS3</h3>
                         <p>Émise le sept. 2024</p>
                         <span class="cert-id">ID : 7839643067</span>
@@ -507,7 +510,7 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #7451eb;"><i class="fa-solid fa-graduation-cap"></i> OpenClassrooms</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_OpenClassrooms.png" alt="OpenClassrooms" class="brand-logo" style="height: 24px;">
                         <h3>Découvrez l'univers de la cybersécurité</h3>
                         <p>Émise le sept. 2024</p>
                         <span class="cert-id">ID : 1531289578</span>
@@ -520,7 +523,7 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #7451eb;"><i class="fa-solid fa-graduation-cap"></i> OpenClassrooms</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_OpenClassrooms.png" alt="OpenClassrooms" class="brand-logo" style="height: 24px;">
                         <h3>Comprendre le web</h3>
                         <p>Émise le sept. 2024</p>
                         <span class="cert-id">ID : 9414539583</span>
@@ -533,7 +536,8 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #f1c40f;"><i class="fa-solid fa-language"></i> CLOE Langues</div>
+                        <!-- CLOE Stylisé de manière ultra propre -->
+                        <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: #f1c40f; margin-bottom: 22px; letter-spacing: 1px;"><i class="fa-solid fa-language" style="margin-right:8px;"></i> CERTIFICATIONS CLOE</div>
                         <h3>CERTIFICATION CLOE FLE</h3>
                         <p>Émise le mai 2025</p>
                         <span class="cert-id">ID : 75477</span>
@@ -546,7 +550,8 @@
 
                 <div class="clean-card">
                     <div>
-                        <div class="badge-header" style="color: #e74c3c;"><i class="fa-solid fa-kit-medical"></i> INRS Santé</div>
+                        <!-- INRS France Stylisé de manière épurée -->
+                        <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: #e74c3c; margin-bottom: 22px; letter-spacing: 1px;"><i class="fa-solid fa-shield-virus" style="margin-right:8px;"></i> INRS FRANCE</div>
                         <h3>Bases en prévention des risques professionnels</h3>
                         <p>Émise le oct. 2025</p>
                         <span class="cert-id">ID : 328299</span>
@@ -571,21 +576,21 @@
                     <div>
                         <span style="font-family: var(--font-mono); color: var(--terminal-green); font-size: 11px;">[Projet Académique]</span>
                         <h3 style="margin-top:5px;">Gestion de parc informatique (GLPI)</h3>
-                        <p>Installation et configuration d’un serveur GLPI couplé à l’agent FusionInventory. Automatisation de l’inventaire matériel/logiciel et centralisation de la gestion des actifs. Simulation d’un environnement d’helpdesk pour la gestion des incidents (Ticketing).</p>
+                        <p>Installation et configuration d'un serveur GLPI couplé à l'agent FusionInventory. Automatisation de l'inventaire matériel/logiciel et centralisation de la gestion des actifs. Simulation d'un environnement d'helpdesk pour la gestion des incidents (Ticketing).</p>
                     </div>
                 </div>
                 <div class="clean-card">
                     <div>
                         <span style="font-family: var(--font-mono); color: var(--terminal-green); font-size: 11px;">[Projet Académique]</span>
-                        <h3 style="margin-top:5px;">Implémentation d’Algorithmes d’Intelligence Artificielle</h3>
-                        <p>Développement d’un algorithme Perceptron en Python (Compréhension des réseaux de neurones). Implémentation de l’algorithme A* (Pathfinding) pour l’optimisation de trajets.</p>
+                        <h3 style="margin-top:5px;">Implémentation d'Algorithmes d'Intelligence Artificielle</h3>
+                        <p>Développement d'un algorithme Perceptron en Python (Compréhension des réseaux de neurones). Implémentation de l'algorithme A* (Pathfinding) pour l'optimisation de trajets.</p>
                     </div>
                 </div>
                 <div class="clean-card">
                     <div>
                         <span style="font-family: var(--font-mono); color: var(--cisco-blue); font-size: 11px;">[Projet Cisco]</span>
-                        <h3 style="margin-top:5px;">Configuration et Sécurisation d’Infrastructure Réseau</h3>
-                        <p>Conception d’architectures réseau sécurisées : Segmentation VLAN, Routage inter-VLAN.</p>
+                        <h3 style="margin-top:5px;">Configuration et Sécurisation d'Infrastructure Réseau</h3>
+                        <p>Conception d'architectures réseau sécurisées : Segmentation VLAN, Routage inter-VLAN.</p>
                     </div>
                 </div>
             </div>
@@ -610,7 +615,7 @@
                     <ul>
                         <li>Maintenance préventive et corrective sur équipements médicaux électroniques.</li>
                         <li>Diagnostic de pannes complexes, lecture de schémas électriques/électroniques et réparation de cartes au composant.</li>
-                        <li>Câblage et vérification des connexions d’alimentation des dispositifs pour assurer la continuité de service.</li>
+                        <li>Câblage et vérification des connexions d'alimentation des dispositifs pour assurer la continuité de service.</li>
                     </ul>
                     <div class="xp-result">✔ Résultat : Réduction de 15 % du temps d'arrêt des dispositifs grâce à un suivi proactif des interventions.</div>
                 </div>
@@ -652,7 +657,7 @@
         <section id="interets">
             <div class="section-header">
                 <span class="section-tag">/ Domaines Hors-Piste</span>
-                <h2 class="section-title">Centres d'intérêt</h2>
+                <h2 class="section-title">Centres d'interest</h2>
             </div>
             <div class="badge-container">
                 <span class="skill-badge"><i class="fa-solid fa-music" style="margin-right:6px; color: var(--cisco-blue)"></i> Musique</span>
@@ -687,6 +692,7 @@
     </main>
 
     <script>
+        // Gestion de l'écran de chargement (Packet Tracer animation)
         window.addEventListener('load', function () {
             const loader = document.getElementById('loader');
             const logs = document.querySelector('.console-logs');
