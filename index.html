@@ -11,19 +11,21 @@
     
     <style>
         /* ------------------------------------------------------
-           1. VARIABLES & DESIGN SYSTEM (Premium Dark)
+           1. VARIABLES & DESIGN SYSTEM (Premium Dark 4K)
         ------------------------------------------------------ */
         :root {
-            --bg-main: #0b0f19;        
-            --bg-sidebar: #111827;     
-            --bg-card: #1f2937;        
+            --bg-main: #060913;        
+            --bg-sidebar: #0b0f19;     
+            --bg-card: rgba(22, 28, 45, 0.4);        
             --text-pure: #ffffff;
-            --text-body: #9ca3af;       
+            --text-body: #94a3b8;       
             --cisco-blue: #00b4d8;     
             --terminal-green: #10b981; 
-            --border-color: #374151;   
+            --border-color: rgba(55, 65, 81, 0.5);   
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --glow-blue: 0 0 20px rgba(0, 180, 216, 0.35);
+            --glow-green: 0 0 20px rgba(16, 185, 129, 0.35);
         }
 
         * {
@@ -36,6 +38,12 @@
 
         body {
             background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 180, 216, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.03) 0px, transparent 50%),
+                linear-gradient(rgba(255,255,255,0.003) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.003) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
             color: var(--text-pure);
             display: flex;
             min-height: 100vh;
@@ -43,7 +51,7 @@
         }
 
         /* ------------------------------------------------------
-           2. ANIMATION PACKET TRACER (LOADER)
+           2. ANIMATION PACKET TRACER (LOADER AVANCÉ)
         ------------------------------------------------------ */
         #loader {
             position: fixed;
@@ -61,7 +69,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            width: 400px;
+            width: 450px;
             justify-content: space-between;
         }
 
@@ -71,52 +79,66 @@
             align-items: center;
             z-index: 5;
             background: var(--bg-main);
-            padding: 10px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 0 12px rgba(255,255,255,0.02);
         }
 
         .network-node i {
-            font-size: 54px;
-            color: #4b5563;
+            font-size: 48px;
+            color: var(--text-body);
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.1));
+            transition: color 0.3s;
         }
 
         .network-node span {
             font-family: var(--font-mono);
             font-size: 11px;
-            color: var(--text-body);
-            margin-top: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2px 8px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
+            color: var(--cisco-blue);
+            margin-top: 10px;
+            background: rgba(0, 180, 216, 0.05);
+            padding: 3px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 180, 216, 0.15);
         }
 
         .ethernet-cable {
             position: absolute;
-            top: 38px;
-            left: 65px;
-            right: 65px;
-            height: 2px;
-            background: repeating-linear-gradient(90deg, #4b5563, #4b5563 4px, transparent 4px, transparent 8px);
+            top: 41px;
+            left: 75px;
+            right: 75px;
+            height: 3px;
+            background: #1e293b;
+            border-radius: 2px;
             z-index: 1;
+            overflow: hidden;
+        }
+
+        .ethernet-cable::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(90deg, transparent, transparent 8px, var(--border-color) 8px, var(--border-color) 16px);
         }
 
         .data-packet {
             position: absolute;
-            top: 35px;
-            left: 65px;
-            width: 8px;
-            height: 8px;
+            top: 38px;
+            left: 85px;
+            width: 10px;
+            height: 10px;
             background-color: var(--cisco-blue);
             border-radius: 50%;
             z-index: 3;
-            box-shadow: 0 0 12px var(--cisco-blue);
-            animation: packetTransit 2s infinite ease-in-out;
+            box-shadow: var(--glow-blue), 0 0 30px var(--cisco-blue);
+            animation: packetTransit 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes packetTransit {
-            0% { left: 65px; background-color: var(--cisco-blue); }
-            50% { left: calc(100% - 73px); background-color: var(--terminal-green); box-shadow: 0 0 12px var(--terminal-green); }
-            100% { left: 65px; background-color: var(--cisco-blue); }
+            0% { left: 85px; background-color: var(--cisco-blue); filter: hue-rotate(0deg); }
+            50% { left: calc(100% - 95px); background-color: var(--terminal-green); box-shadow: var(--glow-green), 0 0 30px var(--terminal-green); }
+            100% { left: 85px; background-color: var(--cisco-blue); filter: hue-rotate(0deg); }
         }
 
         .console-logs {
@@ -124,49 +146,71 @@
             font-family: var(--font-mono);
             font-size: 13px;
             color: var(--text-body);
+            background: rgba(0,0,0,0.3);
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
         .console-cursor { animation: blink 0.8s infinite steps(2); color: var(--cisco-blue); }
         @keyframes blink { 50% { opacity: 0; } }
 
         /* ------------------------------------------------------
-           3. SIDEBAR NAVIGATION
+           3. SIDEBAR NAVIGATION (Haut de gamme)
         ------------------------------------------------------ */
         sidebar {
-            width: 280px;
+            width: 290px;
             height: 100vh;
             position: fixed;
             left: 0;
             top: 0;
             background-color: var(--bg-sidebar);
-            padding: 30px 25px;
+            padding: 40px 25px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             border-right: 1px solid var(--border-color);
             z-index: 100;
+            backdrop-filter: blur(20px);
         }
 
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo-dot { width: 8px; height: 8px; background-color: var(--terminal-green); border-radius: 50%; box-shadow: 0 0 8px var(--terminal-green); }
-        .logo-area h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-dot { 
+            width: 10px; 
+            height: 10px; 
+            background-color: var(--terminal-green); 
+            border-radius: 50%; 
+            box-shadow: var(--glow-green);
+            position: relative;
+        }
+        .logo-dot::before {
+            content: ''; position: absolute; inset: -4px; border: 1px solid var(--terminal-green); border-radius: 50%; opacity: 0.4; animation: pulseRing 1.5s infinite ease-out;
+        }
+        @keyframes pulseRing { 100% { transform: scale(2.5); opacity: 0; } }
+        .logo-area h2 { font-size: 19px; font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
 
-        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 6px; }
         .nav-menu a {
             color: var(--text-body);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
         }
-        .nav-menu a:hover { color: var(--text-pure); background-color: rgba(255, 255, 255, 0.03); }
+        .nav-menu a:hover { 
+            color: var(--text-pure); 
+            background-color: rgba(255, 255, 255, 0.02); 
+            border-color: rgba(0, 180, 216, 0.15);
+            box-shadow: inset 4px 0 0 var(--cisco-blue);
+        }
         .nav-menu a:hover i { color: var(--cisco-blue); transform: translateX(2px); }
-        .nav-menu i { width: 18px; transition: transform 0.2s; }
+        .nav-menu i { width: 20px; font-size: 15px; transition: transform 0.2s; color: rgba(148, 163, 184, 0.7); }
 
         .sidebar-footer {
             display: flex;
@@ -177,76 +221,101 @@
         }
 
         /* ------------------------------------------------------
-           4. CONTENU PRINCIPAL & CARTES
+           4. CONTENU PRINCIPAL & GLOBAL CARDS
         ------------------------------------------------------ */
-        main { margin-left: 280px; width: calc(100% - 280px); padding: 0 80px; }
-        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 0; border-bottom: 1px solid rgba(55, 65, 81, 0.2); }
+        main { margin-left: 290px; width: calc(100% - 290px); padding: 0 100px; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 100px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
         
-        .section-header { margin-bottom: 40px; }
-        .section-tag { font-family: var(--font-mono); color: var(--cisco-blue); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 6px; }
-        .section-title { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; }
+        .section-header { margin-bottom: 50px; }
+        .section-tag { font-family: var(--font-mono); color: var(--cisco-blue); font-size: 11px; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 8px; }
+        .section-title { font-size: 36px; font-weight: 800; letter-spacing: -1px; }
 
-        /* HERO ACCUEIL */
-        .hero-wrapper { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; }
-        .avatar-frame { position: relative; width: 160px; height: 160px; }
-        .avatar-img { width: 100%; height: 100%; border-radius: 24px; object-fit: cover; border: 1px solid var(--border-color); background: var(--bg-sidebar); }
-        .status-badge { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: #111827; border: 1px solid var(--border-color); padding: 4px 12px; border-radius: 20px; font-family: var(--font-mono); font-size: 9px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+        /* HERO ACCUEIL PREMIUM */
+        .hero-wrapper { display: grid; grid-template-columns: auto 1fr; gap: 50px; align-items: flex-start; }
+        .avatar-frame { position: relative; width: 180px; height: 180px; }
+        .avatar-img { width: 100%; height: 100%; border-radius: 32px; object-fit: cover; border: 1px solid var(--border-color); background: var(--bg-sidebar); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .status-badge { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); background: #0b0f19; border: 1px solid var(--border-color); padding: 5px 14px; border-radius: 20px; font-family: var(--font-mono); font-size: 9px; font-weight: 500; white-space: nowrap; display: flex; align-items: center; gap: 8px; box-shadow: var(--glow-green); }
         .status-dot { width: 6px; height: 6px; background-color: var(--terminal-green); border-radius: 50%; animation: pulse 2s infinite; }
 
-        .hero-text h1 { font-size: 48px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
-        .hero-text h1 span { color: var(--cisco-blue); }
-        .hero-text h3 { font-size: 20px; font-weight: 500; color: var(--text-body); margin-bottom: 20px; }
-        .hero-text p { font-size: 15px; color: var(--text-body); line-height: 1.6; max-width: 680px; margin-bottom: 20px; }
+        .hero-text h1 { font-size: 54px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 12px; line-height: 1.1; }
+        .hero-text h1 span { color: var(--cisco-blue); text-shadow: rgba(0, 180, 216, 0.2) 0 0 20px; }
+        .hero-text h3 { font-size: 22px; font-weight: 500; color: #cbd5e1; margin-bottom: 30px; font-family: var(--font-mono); }
+        .hero-text p { font-size: 16px; color: var(--text-body); line-height: 1.7; max-width: 750px; margin-bottom: 24px; text-align: justify; }
 
-        /* SOCIAUX LIENS */
-        .gateway-links { display: flex; gap: 10px; }
-        .gateway-btn { display: flex; align-items: center; justify-content: center; width: 100%; height: 40px; border-radius: 8px; background-color: var(--bg-sidebar); color: var(--text-body); text-decoration: none; font-size: 16px; transition: all 0.2s ease; border: 1px solid var(--border-color); }
-        .gateway-btn:hover { color: var(--text-pure); border-color: var(--cisco-blue); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 180, 216, 0.15); }
+        /* SOCIAUX LIENS FIXED GAUCHE */
+        .gateway-links { display: flex; gap: 12px; }
+        .gateway-btn { display: flex; align-items: center; justify-content: center; width: 100%; height: 44px; border-radius: 10px; background-color: rgba(255,255,255,0.02); color: var(--text-body); text-decoration: none; font-size: 18px; transition: all 0.25s ease; border: 1px solid var(--border-color); }
+        .gateway-btn:hover { color: var(--text-pure); border-color: var(--cisco-blue); transform: translateY(-3px); box-shadow: var(--glow-blue); background-color: rgba(0, 180, 216, 0.05); }
 
-        /* GRID SYSTEM */
-        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .clean-card { background-color: var(--bg-sidebar); border: 1px solid var(--border-color); padding: 25px; border-radius: 14px; transition: border-color 0.25s, transform 0.25s; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
-        .clean-card:hover { border-color: rgba(0, 180, 216, 0.3); transform: translateY(-2px); }
-        .clean-card h3 { font-size: 16px; margin-bottom: 8px; font-weight: 600; color: var(--text-pure); line-height: 1.4; }
-        .clean-card p { color: var(--text-body); font-size: 13px; line-height: 1.5; margin-bottom: 10px; }
-        .cert-id { font-family: var(--font-mono); font-size: 11px; color: var(--text-body); background: rgba(255,255,255,0.02); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); display: inline-block; margin-top: 5px;}
-
-        .cert-logo-svg {
-            height: 32px;
-            max-width: 140px;
-            margin-bottom: 15px;
-            display: block;
+        /* CLEAN GRID CARDS ASYMMÉTRIQUES */
+        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; }
+        .clean-card { 
+            background: var(--bg-card); 
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color); 
+            padding: 35px; 
+            border-radius: 20px; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
         }
+        .clean-card:hover { 
+            border-color: rgba(0, 180, 216, 0.4); 
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: var(--glow-blue), 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .clean-card h3 { font-size: 18px; margin-bottom: 12px; font-weight: 700; color: var(--text-pure); letter-spacing: -0.3px; }
+        .clean-card p { color: var(--text-body); font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
+        .cert-id { font-family: var(--font-mono); font-size: 11px; color: var(--cisco-blue); background: rgba(0, 180, 216, 0.05); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(0, 180, 216, 0.15); display: inline-block; margin-top: 5px;}
 
-        /* TIMELINE EXPERIENCES */
-        .xp-timeline { display: flex; flex-direction: column; gap: 20px; }
-        .xp-card { background: var(--bg-sidebar); border-left: 3px solid var(--cisco-blue); padding: 25px; border-radius: 0 14px 14px 0; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
-        .xp-header { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: flex-start; }
-        .xp-date { font-family: var(--font-mono); font-size: 12px; color: var(--cisco-blue); background: rgba(0, 180, 216, 0.05); padding: 4px 10px; border-radius: 6px; white-space: nowrap; }
-        .xp-card ul { margin-left: 18px; color: var(--text-body); font-size: 13.5px; line-height: 1.6; }
-        .xp-result { margin-top: 10px; font-weight: 500; color: var(--terminal-green); font-size: 13px; font-family: var(--font-mono); }
+        /* ENGINE LOGOS EXCLUSIFS SVG NATIVE */
+        .cert-logo-svg {
+            height: 28px;
+            max-width: 140px;
+            margin-bottom: 20px;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .clean-card:hover .cert-logo-svg { transform: scale(1.05); }
 
-        /* LABELS BADGES COMPÉTENCES */
-        .skill-group { margin-bottom: 25px; }
-        .skill-group h4 { font-size: 15px; color: var(--cisco-blue); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .badge-container { display: flex; flex-wrap: wrap; gap: 8px; }
-        .skill-badge { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 8px; font-size: 13px; color: var(--text-body); }
+        /* TIMELINE EXPERIENCES (High Precision) */
+        .xp-timeline { display: flex; flex-direction: column; gap: 30px; position: relative; }
+        .xp-timeline::before { content: ''; position: absolute; left: 0; top: 15px; bottom: 15px; width: 1px; background: var(--border-color); }
+        .xp-card { background: transparent; padding-left: 35px; position: relative; }
+        .xp-card::before { content: ''; position: absolute; left: -5px; top: 22px; width: 9px; height: 9px; background: var(--bg-main); border: 2px solid var(--cisco-blue); border-radius: 50%; transition: all 0.3s; }
+        .xp-card:hover::before { background: var(--terminal-green); border-color: var(--terminal-green); box-shadow: var(--glow-green); transform: scale(1.3); }
+        .xp-inner { background: var(--bg-card); border: 1px solid var(--border-color); padding: 35px; border-radius: 20px; backdrop-filter: blur(10px); }
+        .xp-header { display: flex; justify-content: space-between; margin-bottom: 16px; align-items: flex-start; }
+        .xp-header h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+        .xp-date { font-family: var(--font-mono); font-size: 12px; color: var(--cisco-blue); background: rgba(0, 180, 216, 0.05); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(0, 180, 216, 0.15); white-space: nowrap; }
+        .xp-card ul { margin-left: 20px; color: var(--text-body); font-size: 14.5px; line-height: 1.7; display: flex; flex-direction: column; gap: 8px; }
+        .xp-result { margin-top: 18px; font-weight: 500; color: var(--terminal-green); font-size: 13.5px; font-family: var(--font-mono); display: flex; align-items: center; gap: 8px; }
 
-        /* CERTIFICATION SPECIFIC BUTTONS */
-        .cert-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .cert-org { font-family: var(--font-mono); font-size: 11px; color: var(--cisco-blue); text-transform: uppercase; }
-        .view-cert-link { background: rgba(0, 180, 216, 0.1); border: 1px solid var(--cisco-blue); color: var(--text-pure); font-size: 12px; padding: 6px 14px; border-radius: 6px; text-decoration: none; text-align: center; transition: all 0.2s; font-weight: 500; }
-        .view-cert-link:hover { background: var(--cisco-blue); color: #000; font-weight: 600; }
+        /* LABELS BADGES COMPÉTENCES CONNECTÉES */
+        .skill-group { margin-bottom: 35px; background: rgba(255,255,255,0.01); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.02); }
+        .skill-group h4 { font-size: 16px; color: var(--cisco-blue); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-badge { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 8px 18px; border-radius: 10px; font-size: 13.5px; color: #cbd5e1; transition: all 0.25s; }
+        .skill-badge:hover { background: rgba(16, 185, 129, 0.03); border-color: var(--terminal-green); color: var(--text-pure); transform: translateY(-2px); }
 
-        /* RESPONSIVE */
+        /* BUTTONS STYLING */
+        .view-cert-link { background: rgba(0, 180, 216, 0.08); border: 1px solid rgba(0, 180, 216, 0.3); color: #fff; font-size: 13px; padding: 8px 18px; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.25s; font-weight: 600; letter-spacing: -0.2px; font-family: var(--font-mono); }
+        .view-cert-link:hover { background: var(--cisco-blue); color: #000; font-weight: 600; border-color: var(--cisco-blue); box-shadow: var(--glow-blue); }
+
+        /* RESPONSIVE DESIGN FOR 4K TO MOBILE */
+        @media (max-width: 1200px) {
+            main { padding: 0 40px; }
+        }
         @media (max-width: 1024px) {
             body { flex-direction: column; }
-            sidebar { width: 100%; height: auto; position: relative; padding: 25px; }
+            sidebar { width: 100%; height: auto; position: relative; padding: 25px; border-right: none; border-bottom: 1px solid var(--border-color); }
             main { margin-left: 0; width: 100%; padding: 0 25px; }
-            .hero-wrapper { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-            .hero-text p { margin: 0 auto 30px auto; }
+            .hero-wrapper { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 30px; }
+            .hero-text p { margin: 0 auto 20px auto; }
             .gateway-links { justify-content: center; }
-            .xp-header { flex-direction: column; gap: 8px; }
+            .xp-header { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
@@ -323,7 +392,7 @@
                         Mon parcours présente une particularité qui constitue aujourd'hui un véritable atout. Avant de me spécialiser dans les réseaux informatiques, j'ai travaillé dans l'électronique and la maintenance d'équipements hospitaliers au Bénin. Cette expérience m'a permis d'acquérir une compréhension concrète du fonctionnement des machines, du câblage, de l'alimentation électrique et des contraintes du terrain.
                     </p>
                     <p>
-                        Elle m'a appris qu'un système fiable repose autant sur des bases matérielles solides que sur une architecture logicielle bien pensée. Aujourd'hui, je poursuis mes études en <strong>réseaux informatiques</strong>, <strong>cybersécurité</strong> et <strong>intelligence artificielle</strong> afin de développer une expertise complète dans la conception et la sécurisation des infrastructures numériques.
+                        Elle m'a appris qu'un système fiable repose autant sur des bases matérielles solides que sur une architecture logicielle bien pensée. Aujourd'hui, je poursuis mes études en <strong>réseaux informatiques</strong>, <strong>cybersécurité</strong> and <strong>intelligence artificielle</strong> afin de développer une expertise complète dans la conception et la sécurisation des infrastructures numériques.
                     </p>
                     <p>
                         Mon objectif est de concevoir, déployer et sécuriser des infrastructures réseau performantes, résilientes et adaptées aux enjeux des entreprises, avant d'évoluer vers un poste d'<strong>Architecte Réseaux & Sécurité</strong>.
@@ -660,49 +729,55 @@
             <div class="xp-timeline">
                 
                 <div class="xp-card">
-                    <div class="xp-header">
-                        <div>
-                            <h3>Technicien de Maintenance Systèmes Critiques</h3>
-                            <p style="color: var(--text-body); font-size: 14px;">Hôpital de Zone de Ouidah</p>
+                    <div class="xp-inner">
+                        <div class="xp-header">
+                            <div>
+                                <h3>Technicien de Maintenance Systèmes Critiques</h3>
+                                <p style="color: var(--cisco-blue); font-size: 14px; font-weight: 500; margin-top: 4px;">Hôpital de Zone de Ouidah</p>
+                            </div>
+                            <span class="xp-date">Juin – Août 2024</span>
                         </div>
-                        <span class="xp-date">Juin – Août 2024</span>
+                        <ul>
+                            <li>Maintenance préventive et corrective sur équipements médicaux électroniques.</li>
+                            <li>Diagnostic de pannes complexes, lecture de schémas électriques/électroniques et réparation de cartes au composant.</li>
+                            <li>Câblage et vérification des connexions d’alimentation des dispositifs pour assurer la continuité de service.</li>
+                        </ul>
+                        <div class="xp-result"><i class="fa-solid fa-circle-check"></i> Résultat : Réduction de 15 % du temps d'arrêt des dispositifs grâce à un suivi proactif des interventions.</div>
                     </div>
-                    <ul>
-                        <li>Maintenance préventive et corrective sur équipements médicaux électroniques.</li>
-                        <li>Diagnostic de pannes complexes, lecture de schémas électriques/électroniques et réparation de cartes au composant.</li>
-                        <li>Câblage et vérification des connexions d’alimentation des dispositifs pour assurer la continuité de service.</li>
-                    </ul>
-                    <div class="xp-result">✔ Résultat : Réduction de 15 % du temps d'arrêt des dispositifs grâce à un suivi proactif des interventions.</div>
                 </div>
 
                 <div class="xp-card">
-                    <div class="xp-header">
-                        <div>
-                            <h3>Technicien de Maintenance & Suivi de Parc</h3>
-                            <p style="color: var(--text-body); font-size: 14px;">Hôpital de Zone d'Adjohoun</p>
+                    <div class="xp-inner">
+                        <div class="xp-header">
+                            <div>
+                                <h3>Technicien de Maintenance & Suivi de Parc</h3>
+                                <p style="color: var(--cisco-blue); font-size: 14px; font-weight: 500; margin-top: 4px;">Hôpital de Zone d'Adjohoun</p>
+                            </div>
+                            <span class="xp-date">Août – Sept. 2023</span>
                         </div>
-                        <span class="xp-date">Août – Sept. 2023</span>
+                        <ul>
+                            <li>Élaboration de protocoles de maintenance pour fiabiliser la disponibilité du matériel.</li>
+                            <li>Gestion des inventaires et documentation technique structurée des interventions.</li>
+                            <li>Support technique de proximité (système Hardware et Infrastructures réseaux/informatiques de l'hôpital) pour le personnel soignant.</li>
+                        </ul>
                     </div>
-                    <ul>
-                        <li>Élaboration de protocoles de maintenance pour fiabiliser la disponibilité du matériel.</li>
-                        <li>Gestion des inventaires et documentation technique structurée des interventions.</li>
-                        <li>Support technique de proximité (système Hardware et Infrastructures réseaux/informatiques de l'hôpital) pour le personnel soignant.</li>
-                    </ul>
                 </div>
 
                 <div class="xp-card">
-                    <div class="xp-header">
-                        <div>
-                            <h3>Stagiaire Technicien de Maintenance</h3>
-                            <p style="color: var(--text-body); font-size: 14px;">CHUD-OP</p>
+                    <div class="xp-inner">
+                        <div class="xp-header">
+                            <div>
+                                <h3>Stagiaire Technicien de Maintenance</h3>
+                                <p style="color: var(--cisco-blue); font-size: 14px; font-weight: 500; margin-top: 4px;">CHUD-OP</p>
+                            </div>
+                            <span class="xp-date">Août – Sept. 2022</span>
                         </div>
-                        <span class="xp-date">Août – Sept. 2022</span>
+                        <ul>
+                            <li>Maintenance préventive des équipements médicaux et rédaction de rapports techniques.</li>
+                            <li>Initiation aux interventions électriques/électroniques et suivi des non-conformités matérielles.</li>
+                            <li>Compréhension des exigences de fiabilité des systèmes critiques et de leur alimentation électrique.</li>
+                        </ul>
                     </div>
-                    <ul>
-                        <li>Maintenance préventive des équipements médicaux et rédaction de rapports techniques.</li>
-                        <li>Initiation aux interventions électriques/électroniques et suivi des non-conformités matérielles.</li>
-                        <li>Compréhension des exigences de fiabilité des systèmes critiques et de leur alimentation électrique.</li>
-                    </ul>
                 </div>
 
             </div>
@@ -714,10 +789,10 @@
                 <h2 class="section-title">Centres d'intérêt</h2>
             </div>
             <div class="badge-container">
-                <span class="skill-badge"><i class="fa-solid fa-music" style="margin-right:6px; color: var(--cisco-blue)"></i> Musique</span>
-                <span class="skill-badge"><i class="fa-solid fa-futbol" style="margin-right:6px; color: var(--cisco-blue)"></i> Football</span>
-                <span class="skill-badge"><i class="fa-solid fa-book" style="margin-right:6px; color: var(--cisco-blue)"></i> Lecture</span>
-                <span class="skill-badge"><i class="fa-solid fa-book-open" style="margin-right:6px; color: var(--cisco-blue)"></i> Manga</span>
+                <span class="skill-badge"><i class="fa-solid fa-music" style="margin-right:8px; color: var(--cisco-blue)"></i> Musique</span>
+                <span class="skill-badge"><i class="fa-solid fa-futbol" style="margin-right:8px; color: var(--cisco-blue)"></i> Football</span>
+                <span class="skill-badge"><i class="fa-solid fa-book" style="margin-right:8px; color: var(--cisco-blue)"></i> Lecture</span>
+                <span class="skill-badge"><i class="fa-solid fa-book-open" style="margin-right:8px; color: var(--cisco-blue)"></i> Manga</span>
             </div>
         </section>
 
@@ -736,8 +811,8 @@
             </div>
             <div class="clean-card" style="max-width: 500px;">
                 <p style="margin-bottom: 20px;">Le port d'écoute est ouvert. Envoyez un message pour échanger sur vos projets informatiques ou opportunités professionnelles.</p>
-                <a href="mailto: kennethoussoulio@gmail.com" style="color: var(--cisco-blue); text-decoration: none; font-family: var(--font-mono); font-weight: 500;">
-                    <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i>kennethoussoulio@gmail.com
+                <a href="mailto:kennethoussoulio@gmail.com" style="color: var(--cisco-blue); text-decoration: none; font-family: var(--font-mono); font-weight: 500; font-size: 15px; display: inline-flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-envelope" style="font-size: 18px;"></i> kennethoussoulio@gmail.com
                 </a>
             </div>
         </section>
